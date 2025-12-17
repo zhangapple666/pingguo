@@ -36,7 +36,7 @@ export const PALETTE = {
   BLUE: '#224E96',
   YELLOW: '#F4D737',
   GREEN: '#35AF76',
-  BEIGE: '#2A2A2A',
+  BEIGE: '#404040',
   WHITE: '#FFFFFF',
   BLACK: '#000000'
 };

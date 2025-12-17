@@ -142,7 +142,7 @@ const App: React.FC = () => {
                </svg>
             </div>
             <div>
-              <h1 className="text-xl md:text-2xl font-medium text-gray-700 tracking-wide">
+              <h1 className="text-xl md:text-2xl font-medium tracking-wide" style={{ color: PALETTE.YELLOW }}>
                 {dailyQuote}
               </h1>
             </div>
