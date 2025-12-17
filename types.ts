@@ -15,6 +15,15 @@ export interface TaskAnalysis {
   reasoning: string;
 }
 
+export interface SearchFilters {
+  query: string;
+  status: 'all' | 'completed' | 'pending';
+  priority: 'all' | 'urgent' | 'important' | 'both';
+  dateRange: 'all' | 'today' | 'week' | 'month' | 'custom';
+  startDate?: number;
+  endDate?: number;
+}
+
 export enum QuadrantID {
   Q1 = 'Q1',
   Q2 = 'Q2',

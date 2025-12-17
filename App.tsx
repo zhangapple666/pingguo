@@ -4,11 +4,13 @@ import { Task, QuadrantID, PALETTE } from './types';
 import { Quadrant } from './components/Quadrant';
 import { TaskInput } from './components/TaskInput';
 import { GanttView } from './components/GanttView';
+import SearchHistory from './components/SearchHistory';
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'matrix' | 'gantt'>('matrix');
+  const [showSearch, setShowSearch] = useState(false);
 
   // Configure sensors to require a small movement (8px) before dragging starts.
   // This allows "click" events to fire on the task items for expansion.
@@ -147,19 +149,29 @@ const App: React.FC = () => {
           </div>
           
           <div className="flex items-center gap-4 bg-white/60 p-1.5 rounded-xl border border-white/40 shadow-sm">
-             <button 
+             <button
               onClick={() => setViewMode('matrix')}
               className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${viewMode === 'matrix' ? 'bg-palette-black text-white shadow-md' : 'text-gray-500 hover:text-gray-800'}`}
              >
                Matrix
              </button>
-             <button 
+             <button
               onClick={() => setViewMode('gantt')}
               className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${viewMode === 'gantt' ? 'bg-palette-black text-white shadow-md' : 'text-gray-500 hover:text-gray-800'}`}
              >
                Timeline
              </button>
              <div className="w-px h-6 bg-gray-300 mx-1"></div>
+             <button
+              onClick={() => setShowSearch(true)}
+              className="px-4 py-2 rounded-lg text-sm font-bold text-gray-500 hover:text-gray-800 transition-all hover:bg-gray-100"
+              title="搜索历史记录"
+             >
+               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+                 <circle cx="11" cy="11" r="8"/>
+                 <path d="m21 21-4.35-4.35"/>
+               </svg>
+             </button>
              <span className="px-3 text-xs font-bold text-gray-500">{completedCount} Done</span>
           </div>
         </div>
@@ -214,6 +226,14 @@ const App: React.FC = () => {
           <GanttView tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} />
         )}
       </main>
+
+      {/* Search Modal */}
+      {showSearch && (
+        <SearchHistory
+          tasks={tasks}
+          onClose={() => setShowSearch(false)}
+        />
+      )}
     </div>
   );
 };
